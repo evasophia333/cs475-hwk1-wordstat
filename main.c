@@ -17,7 +17,8 @@ int main(int argc, char **argv)
 
 	// TODO: repeatedly print menu options and prompt for an option
 	// TODO: display the proper output
-
+	int userChoice = getMenuOption();
+	printf("%d\n",userChoice); //THIS PRINTS THE USER INPUT
 	printf("Exiting...\n");
 	return 0;
 }
