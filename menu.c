@@ -14,5 +14,10 @@ int getMenuOption()
 	printf("Enter 4 to return to inputting more strings.\n");
 	printf("Enter 5 to quit.\n");
 	scanf("%d",&userInput);
+	if(userInput>5||userInput<1){ //Catches the error if the user inputs a different number
+		printf("ERROR, try again!\n");
+		printf(getMenuOption()); //recursive call because they did not choose the right number
+	}else{
 	return userInput;
+	}
 }
