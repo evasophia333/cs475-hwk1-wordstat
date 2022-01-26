@@ -10,6 +10,11 @@
  */
 WordStats initStats(WordStats st)
 {
+	st.wordCount = 0;
+	st.vowelCount =0;
+	st.consonantCount = 0;
+	//st.histo = [];
+
 	// TODO initialize all fields in the st struct before returning it
 	return st;
 }
@@ -22,6 +27,13 @@ WordStats initStats(WordStats st)
  */
 WordStats updateVowelCons(WordStats st, const char str[])
 {
+	//Loop through each character of the str[]
+
+	//convert it to lower case 
+
+	//check if the letter is a vowel or constanant if so increase the respective counter 
+
+	//if not do nothing
 	// TODO - update the vowel and consonant count
 	//        in the st struct before returning it
 	return st;
@@ -35,6 +47,10 @@ WordStats updateVowelCons(WordStats st, const char str[])
  */
 WordStats updateWordCount(WordStats st, const char str[])
 {
+	//loop through the str 
+	//if there is a white space then increase the word counter
+	//also remeber the letter prior and ensure that it is a letter or number not a white space
+
 	// TODO - update the word count in the st struct before returning it
 	return st;
 }
@@ -54,6 +70,7 @@ void printVowelConsFreq(WordStats st)
  */
 void printWordCount(WordStats st)
 {
+	printf("The word count is: %d\n", st.wordCount);
 	// TODO: prints word count
 }
 
