@@ -11,7 +11,7 @@
 WordStats initStats(WordStats st)
 {
 	st.wordCount = 0;
-	st.vowelCount =0;
+	st.vowelCount = 0;
 	st.consonantCount = 0;
 	//st.histo = [];
 
@@ -27,16 +27,19 @@ WordStats initStats(WordStats st)
  */
 WordStats updateVowelCons(WordStats st, const char str[])
 {
-	//Loop through each character of the str[]
-
-	//convert it to lower case 
-
-	//check if the letter is a vowel or constanant if so increase the respective counter 
-
-	//if not do nothing
-	// TODO - update the vowel and consonant count
-	//        in the st struct before returning it
-	return st;
+	
+	for(int i=0;str[i];i++){ 
+		char letter = tolower(str[i]); 
+        if(letter=='a'|| letter=='e'||letter=='i'||letter=='o'||letter=='u'){
+		    st.vowelCount++;
+			printf("Num vowels is: %d\n",st.vowelCount);
+		}else if(letter!=' '){
+            st.consonantCount++;
+			printf("Num constonants is: %d\n",st.consonantCount);
+		}
+ 	}
+	printVowelConsFreq(st);
+	return st; //is it returning the right count?
 }
 
 /**
@@ -61,6 +64,8 @@ WordStats updateWordCount(WordStats st, const char str[])
  */
 void printVowelConsFreq(WordStats st)
 {
+	printf("The vowel count is: %d\n", st.vowelCount);
+	printf("The constanat count is: %d\n", st.consonantCount);
 	// TODO: print vowel and consonant frequency
 }
 

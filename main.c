@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	while(quit!=0){
 	int userChoice = getMenuOption();
 	if(userChoice==1){
-		printVowelConsFreq(ws);
+		updateVowelCons(ws,"hello"); //TODO CHange this to be the user input
 		printf("\n");
 	}else if(userChoice==2){
 		printWordCount(ws);
@@ -32,10 +32,9 @@ int main(int argc, char **argv)
 		printf("\n");
 	}else if(userChoice==4){
 		//have the user input strings 
-	}else if(userChoice=5){
-		quit =0;
+	}else if(userChoice==5){
+		quit = 0;
 	}
-
 	}
 	
 
