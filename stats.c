@@ -27,18 +27,14 @@ WordStats initStats(WordStats st)
  */
 WordStats updateVowelCons(WordStats st, const char str[])
 {
-	
 	for(int i=0;str[i];i++){ 
 		char letter = tolower(str[i]); 
         if(letter=='a'|| letter=='e'||letter=='i'||letter=='o'||letter=='u'){
 		    st.vowelCount++;
-			printf("Num vowels is: %d\n",st.vowelCount);
 		}else if(letter!=' '){
             st.consonantCount++;
-			printf("Num constonants is: %d\n",st.consonantCount);
-		}
+		}	
  	}
-	printVowelConsFreq(st);
 	return st; //is it returning the right count?
 }
 
@@ -48,13 +44,16 @@ WordStats updateVowelCons(WordStats st, const char str[])
  * @param str 
  * @return an updated WordStats struct 
  */
-WordStats updateWordCount(WordStats st, const char str[])
-{
-	//loop through the str 
-	//if there is a white space then increase the word counter
-	//also remeber the letter prior and ensure that it is a letter or number not a white space
-
-	// TODO - update the word count in the st struct before returning it
+WordStats updateWordCount(WordStats st, const char str[]){
+	int length = strlen(str);
+	if(length>=1){
+		st.wordCount++; //initialize it to be one word
+		}
+	for(int i=0;str[i];i++){
+		if(str[i]==32){
+		st.wordCount++;
+		}
+	}
 	return st;
 }
 
@@ -64,8 +63,15 @@ WordStats updateWordCount(WordStats st, const char str[])
  */
 void printVowelConsFreq(WordStats st)
 {
-	printf("The vowel count is: %d\n", st.vowelCount);
-	printf("The constanat count is: %d\n", st.consonantCount);
+	printf("%d\n",st.vowelCount);
+	printf("%d\n",st.consonantCount);
+	printf("%d\n",st.wordCount);
+	float total = st.vowelCount+st.consonantCount;
+
+	float percentVowel = ((st.vowelCount)/(total));
+	float percentCons = ((st.consonantCount)/(total));
+	printf("Vowels: %d (%.2f), ", st.vowelCount, percentVowel);
+	printf("Consonants: %d (%.2f), Total: %.0f ", st.consonantCount, percentCons, total);
 	// TODO: print vowel and consonant frequency
 }
 
@@ -76,7 +82,6 @@ void printVowelConsFreq(WordStats st)
 void printWordCount(WordStats st)
 {
 	printf("The word count is: %d\n", st.wordCount);
-	// TODO: prints word count
 }
 
 /**

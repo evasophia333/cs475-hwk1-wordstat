@@ -19,12 +19,18 @@ int main(int argc, char **argv)
 	// TODO: display the proper output
 	WordStats ws;
 	initStats(ws);
+	printf("%d\n",ws.vowelCount);
+	printf("%d\n",ws.consonantCount);
+	printf("%d\n",ws.wordCount);
 	while(quit!=0){
 	int userChoice = getMenuOption();
 	if(userChoice==1){
-		updateVowelCons(ws,"hello"); //TODO CHange this to be the user input
+		ws = updateWordCount(ws, "hello how are you?");
+		ws = updateVowelCons(ws,"hello how are you?"); //TODO Change this to be the user input
+		printVowelConsFreq(ws);
 		printf("\n");
 	}else if(userChoice==2){
+		ws = updateWordCount(ws, "hello how are you?");
 		printWordCount(ws);
 		printf("\n");
 	}else if(userChoice==3){
