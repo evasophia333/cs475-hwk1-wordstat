@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#define ALPHABET_SIZE 26
+
+
 /**
  * Initializes the statistics structure
  * @param st an uninitialized WordStats struct
@@ -13,9 +16,9 @@ WordStats initStats(WordStats st)
 	st.wordCount = 0;
 	st.vowelCount = 0;
 	st.consonantCount = 0;
-	//st.histo = [];
-
-	// TODO initialize all fields in the st struct before returning it
+	for(int a=0;a<=ALPHABET_SIZE;a++){ //initialize histo
+		st.histo[a]=0;
+	}
 	return st;
 }
 
@@ -63,16 +66,11 @@ WordStats updateWordCount(WordStats st, const char str[]){
  */
 void printVowelConsFreq(WordStats st)
 {
-	printf("%d\n",st.vowelCount);
-	printf("%d\n",st.consonantCount);
-	printf("%d\n",st.wordCount);
 	float total = st.vowelCount+st.consonantCount;
-
 	float percentVowel = ((st.vowelCount)/(total));
 	float percentCons = ((st.consonantCount)/(total));
 	printf("Vowels: %d (%.2f), ", st.vowelCount, percentVowel);
 	printf("Consonants: %d (%.2f), Total: %.0f ", st.consonantCount, percentCons, total);
-	// TODO: print vowel and consonant frequency
 }
 
 /**
@@ -88,9 +86,44 @@ void printWordCount(WordStats st)
  * Outputs histogram vertically
  * @param st WordStats structure
  */
-void printHistogram(WordStats st)
+void printHistogram(WordStats st, const char str[])
 {
-	// TODO: Prints vertical histogram
+	int copyhist[ALPHABET_SIZE];
+	for(int a=0;a<ALPHABET_SIZE;a++){ //initialize copyhist
+		copyhist[a]=0;
+	}
+	int counter =0;
+	for(int i=0;str[i];i++){
+		st.histo[(str[i]-97)]++; //increases the count for elements that are repeated
+		copyhist[(str[i]-97)]++;
+		if(copyhist[(str[i]-97)]>counter){
+			counter = copyhist[(str[i]-97)];
+		}
+	}
+	while(counter>0){
+	for(int j=0;j<ALPHABET_SIZE;j++){
+		if(counter==copyhist[j]){
+			printf("* ");
+			copyhist[j]--;
+		}else{
+			printf("  ");
+		}
+	}
+	counter--;
+	printf("\n");
+	}
+	for(int k=0;k<ALPHABET_SIZE;k++){
+		printf("%d ",st.histo[k]);
+	}
+	printf("\n");
+	for(int l=0;l<ALPHABET_SIZE;l++){
+		printf("%c ",l+97);
+	}
+	//copy the histogram
+	//figure out biggest number in the histogram 
+	//if the ith element is that max number then print a star if it is not then print a space
+	//once they are all zero then print the copied histogram 
+	//then print the alphabet
 }
 
 /**
@@ -100,5 +133,9 @@ void printHistogram(WordStats st)
  */
 void updateHistogram(int histo[], const char str[])
 {
-	// TODO: updates the frequencies in the histogram, given the letters in the input string
+	for(int i=0;str[i];i++){
+		printf("String: %d\n",str[i]);
+		histo[(str[i]-97)]++; //increases the count for elements that are repeated
+	}
 }
+

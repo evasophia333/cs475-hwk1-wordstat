@@ -18,10 +18,7 @@ int main(int argc, char **argv)
 	// TODO: repeatedly print menu options and prompt for an option
 	// TODO: display the proper output
 	WordStats ws;
-	initStats(ws);
-	printf("%d\n",ws.vowelCount);
-	printf("%d\n",ws.consonantCount);
-	printf("%d\n",ws.wordCount);
+	ws = initStats(ws);
 	while(quit!=0){
 	int userChoice = getMenuOption();
 	if(userChoice==1){
@@ -34,7 +31,9 @@ int main(int argc, char **argv)
 		printWordCount(ws);
 		printf("\n");
 	}else if(userChoice==3){
-		printHistogram(ws);
+		//printHistogram(ws);
+		//updateHistogram(ws.histo, "haaello");
+		printHistogram(ws, "aaabbbdd");
 		printf("\n");
 	}else if(userChoice==4){
 		//have the user input strings 

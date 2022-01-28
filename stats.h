@@ -21,6 +21,6 @@ WordStats updateWordCount(WordStats st, const char input[]);
 void updateHistogram(int histo[], const char str[]);
 void printVowelConsFreq(WordStats st);
 void printWordCount(WordStats st);
-void printHistogram(WordStats st);
+void printHistogram(WordStats st, const char str[]);
 
 #endif /* STATS_H_ */
