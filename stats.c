@@ -31,14 +31,17 @@ WordStats initStats(WordStats st)
 WordStats updateVowelCons(WordStats st, const char str[])
 {
 	for(int i=0;str[i];i++){ 
-		char letter = tolower(str[i]); 
+		char letter = tolower(str[i]);
+		int letterNum = (int)letter;
+		if(letterNum>=97 && letterNum<=123){ //ensures it is a letter
         if(letter=='a'|| letter=='e'||letter=='i'||letter=='o'||letter=='u'){
 		    st.vowelCount++;
 		}else if(letter!=' '){
             st.consonantCount++;
 		}	
+		}
  	}
-	return st; //is it returning the right count?
+	return st; 
 }
 
 /**
@@ -49,13 +52,19 @@ WordStats updateVowelCons(WordStats st, const char str[])
  */
 WordStats updateWordCount(WordStats st, const char str[]){
 	int length = strlen(str);
+	int letterNum = 0;
 	if(length>=1){
+		letterNum = (int)str[1];
+		if(letterNum>=97 && letterNum<=123){ //ensures it is a number
 		st.wordCount++; //initialize it to be one word
 		}
+	}
 	for(int i=0;str[i];i++){
+		int letterNum = (int)str[i];
 		if(str[i]==32){
 		st.wordCount++;
 		}
+		letterNum =0;
 	}
 	return st;
 }
@@ -67,10 +76,10 @@ WordStats updateWordCount(WordStats st, const char str[]){
 void printVowelConsFreq(WordStats st)
 {
 	float total = st.vowelCount+st.consonantCount;
-	float percentVowel = ((st.vowelCount)/(total));
-	float percentCons = ((st.consonantCount)/(total));
-	printf("Vowels: %d (%.2f), ", st.vowelCount, percentVowel);
-	printf("Consonants: %d (%.2f), Total: %.0f ", st.consonantCount, percentCons, total);
+	float percentVowel = ((st.vowelCount)/(total))*100;
+	float percentCons = ((st.consonantCount)/(total))*100;
+	printf("Vowels: %d (%.2f%), ", st.vowelCount, percentVowel);
+	printf("Consonants: %d (%.2f%), Total: %.0f ", st.consonantCount, percentCons, total);
 }
 
 /**
@@ -94,14 +103,24 @@ void printHistogram(WordStats st, const char str[])
 	}
 	int counter =0;
 	for(int i=0;str[i];i++){
+		if(isalpha(str[i])){
+		if(islower(str[i])){	
 		st.histo[(str[i]-97)]++; //increases the count for elements that are repeated
-		copyhist[(str[i]-97)]++;
+		copyhist[(str[i]-97)]++; //increases the count for another array that we will modify
 		if(copyhist[(str[i]-97)]>counter){
 			counter = copyhist[(str[i]-97)];
 		}
+		}else if(isupper(str[i])){
+			st.histo[(str[i]-65)]++; //increases the count for elements that are repeated
+			copyhist[(str[i]-65)]++; //increases the count for another array that we will modify
+			if(copyhist[(str[i]-65)]>counter){
+				counter = copyhist[(str[i]-65)];
+			}
+		}
+		}
 	}
 	while(counter>0){
-	for(int j=0;j<ALPHABET_SIZE;j++){
+	for(int j=0;j<ALPHABET_SIZE;j++){ //print the tables
 		if(counter==copyhist[j]){
 			printf("* ");
 			copyhist[j]--;
@@ -112,18 +131,13 @@ void printHistogram(WordStats st, const char str[])
 	counter--;
 	printf("\n");
 	}
-	for(int k=0;k<ALPHABET_SIZE;k++){
+	for(int k=0;k<ALPHABET_SIZE;k++){ //print the occurences
 		printf("%d ",st.histo[k]);
 	}
 	printf("\n");
-	for(int l=0;l<ALPHABET_SIZE;l++){
+	for(int l=0;l<ALPHABET_SIZE;l++){ //print the alphabet
 		printf("%c ",l+97);
 	}
-	//copy the histogram
-	//figure out biggest number in the histogram 
-	//if the ith element is that max number then print a star if it is not then print a space
-	//once they are all zero then print the copied histogram 
-	//then print the alphabet
 }
 
 /**
@@ -134,8 +148,9 @@ void printHistogram(WordStats st, const char str[])
 void updateHistogram(int histo[], const char str[])
 {
 	for(int i=0;str[i];i++){
-		printf("String: %d\n",str[i]);
+		if(isalpha(str[i])){
 		histo[(str[i]-97)]++; //increases the count for elements that are repeated
+		}
 	}
 }
 

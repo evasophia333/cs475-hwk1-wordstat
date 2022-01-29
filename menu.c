@@ -17,7 +17,7 @@ int getMenuOption()
 	if(userInput>5||userInput<1){ //Catches the error if the user inputs a different number
 		printf("ERROR, try a number between one and five!\n");
 		printf(getMenuOption()); //recursive call because they did not choose the right number
-	}else{
+	}else {
 	return userInput;
 	}
 }
